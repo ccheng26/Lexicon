@@ -1,17 +1,17 @@
 class Lexicon {
     constructor() {
-        this.container = []
-        this.maxWordLength = 0
-        this.validWords = []
+        this.container = [];
+        this.maxWordLength = 0;
+        this.validWords = [];
     }
 
     add_word(string) {
         // populate the lexicon and add new words as needed
-        this.container.push(string.split(''))
+        this.container.push(string.split(''));
         if (string.length > this.maxWordLength) {
-            this.maxWordLength = string.length
+            this.maxWordLength = string.length;
         }
-        this.genWordList()
+        this.genWordList();
     }
 
     is_word(string) {
@@ -22,14 +22,14 @@ class Lexicon {
             return false;
         }
 
-        return !!this.validWords.filter(word => word === string).length
+        return !!this.validWords.filter(word => word === string).length;
     }
 
     is_prefix(string) {
         // returns True if input is the prefix of any word in the lexicon,
         // order matters, partial match
         
-        let flag = false
+        let flag = false;
         this.validWords.forEach((word) => {
             // Check if the first word is prefix
             if (word.indexOf(string) === 0) {
@@ -37,14 +37,14 @@ class Lexicon {
             }
         });
 
-        return flag
+        return flag;
     }
 
     genWordList() { // O(n^2)
-        const wordList = this.container.map(word => word.join(''))
+        const wordList = this.container.map(word => word.join(''));
         
         for (let i = 0; i < this.maxWordLength; i++) {
-            let word = ''
+            let word = '';
             for (let j = 0; j < this.maxWordLength; j++) {
                 if (this.container[j] && this.container[j][i]) {
                     word += this.container[j][i]
@@ -53,8 +53,8 @@ class Lexicon {
             wordList.push(word);
         }
         
-        this.validWords = wordList
-        return wordList
+        this.validWords = wordList;
+        return wordList;
     }
 }
 
